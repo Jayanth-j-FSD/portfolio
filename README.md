@@ -1,4 +1,4 @@
-# Jayanth Reddy - Portfolio
+# Jayanth Reddy - [Portfolio](https://jayanth-reddy-dev.vercel.app/)
 
 Single-page developer portfolio built with React, TypeScript, Vite and Tailwind CSS.
 
