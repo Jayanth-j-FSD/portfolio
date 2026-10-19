@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0b1020;
+  --color-surface: #131a30;
+  --color-line: #232c47;
+  --color-ink: #e8ecf8;
+  --color-muted: #9aa5c4;
+  --color-accent: #6ea8fe;
+  --color-thread: #3b6fd9;
+  --color-thread-deep: #1d3a7a;
+
+  /* slow pendulum-like drift for the hero glow: left to right on a slight diagonal */
+  --animate-drift: drift 20s ease-in-out infinite alternate;
+  @keyframes drift {
+    0% { transform: translate(-11rem, -1.5rem) scale(1); }
+    100% { transform: translate(11rem, 2.5rem) scale(1.12); }
+  }
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/*
+  Page width. The side gap grows gently with the screen (20px on phones up to 64px),
+  the content stops growing at 90rem, and only then does it sit centred with extra space.
+*/
+:root {
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --container-max: 90rem;
+}
+
+.page-container {
+  width: min(100% - 2 * var(--gutter), var(--container-max));
+  margin-inline: auto;
+}
+
+/* The thread sits about 70% of a gutter to the left of the page content, whatever the screen width. */
+.thread-rail {
+  left: calc((100% - min(100% - 2 * var(--gutter), var(--container-max))) / 2 - var(--gutter) * 0.7);
+}
+
+/* Primary call-to-action: muted steel blue. Padding and font size are set where it is used. */
+@layer components {
+  .btn-primary {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    overflow: hidden;
+    border: 1px solid rgb(143 176 214 / 0.28);
+    border-radius: 0.625rem;
+    background-image: linear-gradient(180deg, #4d6d97 0%, #3a5780 100%);
+    color: #f1f5fb;
+    font-weight: 500;
+    box-shadow:
+      0 6px 16px -6px rgb(5 10 28 / 0.75),
+      inset 0 1px 0 rgb(255 255 255 / 0.14);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      filter 0.25s ease;
+  }
+
+  /* light sweep across the button on hover */
+  .btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.2) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.7s ease;
+    pointer-events: none;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow:
+      0 12px 24px -8px rgb(77 109 151 / 0.55),
+      inset 0 1px 0 rgb(255 255 255 / 0.2);
+  }
+
+  .btn-primary:hover::after {
+    transform: translateX(120%);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+    filter: brightness(0.97);
+  }
+
+  .btn-primary:focus-visible {
+    outline: 2px solid #8fb0d6;
+    outline-offset: 3px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-drift,
+  .animate-ping {
+    animation: none;
+  }
+  .btn-primary,
+  .btn-primary::after {
+    transition: none;
+  }
+  .btn-primary:hover {
+    transform: none;
+  }
+}
