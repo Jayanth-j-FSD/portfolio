@@ -65,10 +65,10 @@ export const heroStack = ['React', 'Node.js', 'NestJS', 'PostgreSQL']
 // Text wrapped in **double asterisks** is highlighted on the page.
 export const about = {
   intro:
-    'Full-Stack Software Developer with **6 years** of experience building, maintaining and improving web applications with **React, Node.js, NestJS** and **PostgreSQL**.',
+    'Full-Stack Software Developer with **4+ years** of experience building, maintaining and improving web applications with **React, Node.js, NestJS** and **PostgreSQL**.',
   body: 'I design **REST APIs**, integrate third-party services and build **e-commerce** solutions, from **Shopify** and custom checkout flows to payment integrations and webhooks. I enjoy turning business requirements into practical, maintainable software that works reliably in real-world environments.',
   stats: [
-    { icon: '🗓️', value: '6+', label: 'Years of experience' },
+    { icon: '🗓️', value: '4+', label: 'Years of experience' },
     { icon: '🧩', value: 'Full-stack', label: 'React · Node.js · NestJS · PostgreSQL' },
     { icon: '🤖', value: 'AI-assisted', label: 'Faster delivery, carefully reviewed' },
   ],
